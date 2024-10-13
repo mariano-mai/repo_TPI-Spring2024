@@ -1,6 +1,8 @@
 package com.informatorio.recetas.domain;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.Column;
@@ -20,10 +22,19 @@ import lombok.Setter;
 public class Ingredient {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator="sequence-generator")
+	@GenericGenerator(
+			name="sequence-generator",
+			strategy="org.hibernate.id.enhanced.SequenceStyleGenerator",
+			parameters= {
+					@Parameter(name="sequence_name", value="ingredient_sequence"),
+					@Parameter(name="initial_value", value="1")
+			}
+				)
+	@SuppressWarnings("deprecation")
 	@JdbcTypeCode(SqlTypes.CHAR)
 	@Column(length=30, columnDefinition="varchar(36)", updatable=false, nullable=false)
-	private int id;
+	private Long id;
 	
 	@Column(length=50, nullable=false, unique=true)
 	private String nombre;
