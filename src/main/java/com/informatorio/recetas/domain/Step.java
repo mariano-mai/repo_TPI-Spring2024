@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,7 +46,8 @@ public class Step {
 	@Column
 	private int tiempoEstimado;
 	
-	@OneToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@Column
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinColumn(name="ingrediente_id")
 	private List<Ingredient> ingredientes;
 	

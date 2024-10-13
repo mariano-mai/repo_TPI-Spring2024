@@ -41,7 +41,7 @@ public class Recipe {
 	@Column(nullable=false, unique=true)
 	private String nombre;
 	
-	@ManyToMany(mappedBy="recetas", fetch=FetchType.EAGER)
+	@ManyToMany
 	private List<Step> pasos;
 	
 	@Column(nullable=false)
