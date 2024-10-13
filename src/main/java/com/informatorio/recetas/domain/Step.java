@@ -7,10 +7,15 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,8 +36,8 @@ public class Step {
 	@Column(length=30, columnDefinition="varchar(36)", updatable=false, nullable=false)
 	private UUID id;
 	
-	@Column
-	private Recipe receta;
+	@ManyToMany(mappedBy="pasos", fetch=FetchType.LAZY)
+	private List<Recipe> recetas;
 	
 	@Column(length=5000, nullable=false)
 	private String descripcion;
@@ -40,7 +45,8 @@ public class Step {
 	@Column
 	private int tiempoEstimado;
 	
-	
+	@OneToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@JoinColumn(name="ingrediente_id")
 	private List<Ingredient> ingredientes;
 	
 	@Column

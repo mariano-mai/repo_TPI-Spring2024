@@ -13,8 +13,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,7 +41,7 @@ public class Recipe {
 	@Column(nullable=false, unique=true)
 	private String nombre;
 	
-	
+	@ManyToMany(mappedBy="recetas", fetch=FetchType.EAGER)
 	private List<Step> pasos;
 	
 	@Column(nullable=false)
@@ -48,7 +51,7 @@ public class Recipe {
 	@Column(length=5000, nullable=false)
 	private String descripcion;
 	
-	
+	@ManyToOne
 	private Category categoria;
 
 }
