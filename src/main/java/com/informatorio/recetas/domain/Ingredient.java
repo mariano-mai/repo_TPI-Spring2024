@@ -32,7 +32,7 @@ public class Ingredient {
 			}
 				)
 	@SuppressWarnings("deprecation")
-	@JdbcTypeCode(SqlTypes.CHAR)
+	@JdbcTypeCode(SqlTypes.INTEGER)
 	@Column(length=30, columnDefinition="varchar(36)", updatable=false, nullable=false)
 	private Long id;
 	
