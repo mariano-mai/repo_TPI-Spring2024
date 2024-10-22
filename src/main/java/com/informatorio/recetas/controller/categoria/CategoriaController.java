@@ -25,7 +25,7 @@ public class CategoriaController {
 		Optional<CategoryCreatedDto> categoryCreatedDto = categoriaService.createCategory(categoryCreateDto);
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.body(categoryCreatedDto);
+				.body(categoryCreatedDto.get());
 	}
 
 }
