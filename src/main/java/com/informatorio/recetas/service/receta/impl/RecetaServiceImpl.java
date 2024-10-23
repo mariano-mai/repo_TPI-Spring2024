@@ -12,6 +12,7 @@ import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
 import com.informatorio.recetas.mapper.receta.RecipeMapper;
 import com.informatorio.recetas.repository.categoria.CategoryRepository;
 import com.informatorio.recetas.repository.receta.RecipeRepository;
+import com.informatorio.recetas.service.categoria.CategoriaService;
 import com.informatorio.recetas.service.receta.RecetaService;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class RecetaServiceImpl implements RecetaService{
 	private RecipeMapper recipeMapper;
 	private RecipeRepository recipeRepository;
 	private CategoryRepository categoryRepository;
+	private CategoriaService categoryService;
 	
 	@Override
 	public Optional<RecipeCreatedDto> createRecipe(RecipeCreateDto recipeCreateDto) {
@@ -34,6 +36,7 @@ public class RecetaServiceImpl implements RecetaService{
 	public Optional<RecipeCategoryUpdatedDto> addCategory(UUID idReceta, UUID idCategoria) {
 		Recipe receta = recipeRepository.getReferenceById(idReceta);
 		receta.setCategoria(categoryRepository.getReferenceById(idCategoria));
+		categoryService.addRecipe(idReceta, idCategoria);
 		return Optional.of(recipeMapper.recetaToRecetaCategoriaUpdatedDto(recipeRepository.save(receta)));
 	}
 }
