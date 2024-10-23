@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 import com.informatorio.recetas.domain.Recipe;
+import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
 import com.informatorio.recetas.mapper.receta.RecipeMapper;
@@ -29,6 +30,16 @@ public class RecipeMapperImpl implements RecipeMapper{
 				recipe.getNombre(),
 				recipe.getDificultad(),
 				recipe.getDescripcion());
+	}
+
+	@Override
+	public RecipeCategoryUpdatedDto recetaToRecetaCategoriaUpdatedDto(Recipe recipe) {
+		return new RecipeCategoryUpdatedDto(
+				recipe.getId(),
+				recipe.getNombre(),
+				recipe.getDificultad(),
+				recipe.getDescripcion(),
+				recipe.getCategoria().getId());
 	}
 
 }

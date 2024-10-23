@@ -1,13 +1,18 @@
 package com.informatorio.recetas.controller.receta;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.informatorio.recetas.dto.receta.RecipeCategoryUpdateDto;
+import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
 import com.informatorio.recetas.service.receta.RecetaService;
@@ -26,6 +31,16 @@ public class RecetaController {
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(recipeCreatedDto.get());
+	}
+	
+	@PutMapping("/api/v1/recipe/{idReceta}")
+	public ResponseEntity<?> updateCategoryOfRecipe(
+			@PathVariable(value="idReceta") UUID id,
+			@RequestBody RecipeCategoryUpdateDto recipeCategoryUpdateDto){
+		Optional<RecipeCategoryUpdatedDto> recipeUpdated = recipeService.addCategory(id, recipeCategoryUpdateDto.idCategoria());
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(recipeUpdated.get());
 	}
 
 }
