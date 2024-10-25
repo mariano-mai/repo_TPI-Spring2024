@@ -1,5 +1,6 @@
 package com.informatorio.recetas.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,8 +14,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,8 +39,8 @@ public class Step {
 	@Column(length=30, columnDefinition="varchar(36)", updatable=false, nullable=false)
 	private UUID id;
 	
-	@ManyToMany(mappedBy="pasos", fetch=FetchType.LAZY)
-	private List<Recipe> recetas;
+	@ManyToOne
+	private Recipe receta;
 	
 	@Column(length=5000, nullable=false)
 	private String descripcion;
@@ -48,7 +51,8 @@ public class Step {
 	@Column
 	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinTable(name="ingrediente_paso")
-	private List<Ingredient> ingredientes;
+	//@JoinColumn(name="ingrediente_id")
+	private List<Ingredient> ingredientes = new ArrayList<>();
 	
 	@Column
 	private boolean esNecesario;

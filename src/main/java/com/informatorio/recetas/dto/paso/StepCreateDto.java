@@ -1,5 +1,14 @@
 package com.informatorio.recetas.dto.paso;
 
-public record StepCreateDto(String descripcion, int tiempoEstimado, boolean esNecesario) {
+import java.util.List;
+import java.util.UUID;
+
+
+public record StepCreateDto(
+		UUID idReceta, 
+		String descripcion, 
+		int tiempoEstimado, 
+		//List<Long> ingredientes, 
+		boolean esNecesario) {
 
 }
