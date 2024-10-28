@@ -37,7 +37,7 @@ public class PasoController {
 	public ResponseEntity<?> addIngredient(
 			@PathVariable(value="idStep") UUID id,
 			@RequestBody StepIngredientUpdateDto stepIngredientUpdateDto){
-		Optional<StepIngredientUpdatedDto> stepUpdated = stepService.addIngredient(id, stepIngredientUpdateDto.id());
+		Optional<StepIngredientUpdatedDto> stepUpdated = stepService.addIngredient(id, stepIngredientUpdateDto.ingredientesDto());
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(stepUpdated.get());

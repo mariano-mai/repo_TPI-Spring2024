@@ -38,9 +38,10 @@ public class Category {
 	@Column(length=50, nullable=false, unique=true)
 	private String nombre;
 	
-	//@OneToMany(mappedBy="categoria", fetch=FetchType.LAZY)
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="receta_categoria")
+	@OneToMany(mappedBy="categoria", fetch=FetchType.LAZY)
+	//@OneToMany(fetch=FetchType.LAZY)
+	//@JoinTable(name="receta_categoria")
+	//@JoinColumn(name="receta_id")
 	private List<Recipe> recetas;
 
 }

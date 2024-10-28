@@ -1,7 +1,10 @@
 package com.informatorio.recetas.dto.paso;
 
-import java.util.UUID;
+import java.util.List;
 
-public record StepIngredientUpdateDto(UUID id) {
+import com.informatorio.recetas.dto.ingrediente.IngredienteCreateDto;
+
+public record StepIngredientUpdateDto(
+		List<IngredienteCreateDto> ingredientesDto) {
 
 }

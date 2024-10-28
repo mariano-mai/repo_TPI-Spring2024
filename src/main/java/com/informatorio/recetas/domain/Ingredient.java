@@ -8,6 +8,7 @@ import org.hibernate.type.SqlTypes;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,10 +34,11 @@ public class Ingredient {
 				)
 	@SuppressWarnings("deprecation")
 	@JdbcTypeCode(SqlTypes.INTEGER)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(length=30, columnDefinition="varchar(36)", updatable=false, nullable=false)
 	private Long id;
 	
-	@Column(length=50, nullable=false, unique=true)
+	@Column(length=50, nullable=false, unique=false)
 	private String nombre;
 	
 	@Column(length=1000)

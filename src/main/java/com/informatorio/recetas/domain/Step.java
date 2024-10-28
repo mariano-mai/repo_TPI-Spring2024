@@ -50,7 +50,12 @@ public class Step {
 	
 	@Column
 	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	@JoinTable(name="ingrediente_paso")
+	@JoinTable(
+			name="ingrediente_paso",
+			joinColumns=
+				@JoinColumn(name="step_id", referencedColumnName ="id"),
+			inverseJoinColumns=
+				@JoinColumn(name="ingredient_id", referencedColumnName="id"))
 	//@JoinColumn(name="ingrediente_id")
 	private List<Ingredient> ingredientes = new ArrayList<>();
 	
