@@ -4,6 +4,10 @@ import java.util.UUID;
 
 import com.informatorio.recetas.enumerator.DificultadEnum;
 
-public record RecipeCreatedDto(UUID id, String nombre, DificultadEnum dificultad, String descripcion) {
+public record RecipeCreatedDto(
+		UUID id, 
+		String nombre, 
+		DificultadEnum dificultad, 
+		String descripcion) {
 
 }

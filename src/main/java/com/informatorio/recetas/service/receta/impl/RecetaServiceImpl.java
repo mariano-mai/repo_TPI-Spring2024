@@ -39,4 +39,10 @@ public class RecetaServiceImpl implements RecetaService{
 		categoryService.addRecipe(idReceta, idCategoria);
 		return Optional.of(recipeMapper.recetaToRecetaCategoriaUpdatedDto(recipeRepository.save(receta)));
 	}
+
+	@Override
+	public Optional<RecipeCreatedDto> getRecetaById(UUID id) {
+		Recipe receta = recipeRepository.getReferenceById(id);
+		return Optional.of(recipeMapper.recetaToRecetaCreatedDto(receta));
+	}
 }

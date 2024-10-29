@@ -12,5 +12,7 @@ public interface RecetaService {
 	Optional<RecipeCreatedDto> createRecipe(RecipeCreateDto recipeCreateDto);
 	
 	Optional<RecipeCategoryUpdatedDto> addCategory(UUID idReceta, UUID idCategoria);
+	
+	Optional<RecipeCreatedDto> getRecetaById(UUID id);
 
 }
