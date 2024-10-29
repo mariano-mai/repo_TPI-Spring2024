@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
+import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
 
 public interface RecetaService {
 	
@@ -13,6 +14,6 @@ public interface RecetaService {
 	
 	Optional<RecipeCategoryUpdatedDto> addCategory(UUID idReceta, UUID idCategoria);
 	
-	Optional<RecipeCreatedDto> getRecetaById(UUID id);
+	Optional<RecipeGetByIdDto> getRecetaById(UUID id);
 
 }

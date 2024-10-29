@@ -9,6 +9,7 @@ import com.informatorio.recetas.domain.Recipe;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
+import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
 import com.informatorio.recetas.mapper.receta.RecipeMapper;
 import com.informatorio.recetas.repository.categoria.CategoryRepository;
 import com.informatorio.recetas.repository.receta.RecipeRepository;
@@ -41,8 +42,8 @@ public class RecetaServiceImpl implements RecetaService{
 	}
 
 	@Override
-	public Optional<RecipeCreatedDto> getRecetaById(UUID id) {
+	public Optional<RecipeGetByIdDto> getRecetaById(UUID id) {
 		Recipe receta = recipeRepository.getReferenceById(id);
-		return Optional.of(recipeMapper.recetaToRecetaCreatedDto(receta));
+		return Optional.of(recipeMapper.recetaToRecetaGetByIdDto(receta));
 	}
 }

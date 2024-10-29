@@ -16,6 +16,7 @@ import com.informatorio.recetas.dto.receta.RecipeCategoryUpdateDto;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
+import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
 import com.informatorio.recetas.service.receta.RecetaService;
 
 import lombok.AllArgsConstructor;
@@ -47,10 +48,10 @@ public class RecetaController {
 	@GetMapping("/api/v1/recipe/{idReceta}")
 	public ResponseEntity<?> getRecipeById(
 			@PathVariable(value="idReceta") UUID id){
-		Optional<RecipeCreatedDto> recipeCreatedDto = recipeService.getRecetaById(id);
+		Optional<RecipeGetByIdDto> recipeGetByIdDto = recipeService.getRecetaById(id);
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(recipeCreatedDto.get());
+				.body(recipeGetByIdDto.get());
 	}
 
 }

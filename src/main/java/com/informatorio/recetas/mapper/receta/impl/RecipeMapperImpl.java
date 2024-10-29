@@ -8,10 +8,17 @@ import com.informatorio.recetas.domain.Recipe;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
+import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
+import com.informatorio.recetas.mapper.categoria.CategoryMapper;
 import com.informatorio.recetas.mapper.receta.RecipeMapper;
 
+import lombok.AllArgsConstructor;
+
 @Component
+@AllArgsConstructor
 public class RecipeMapperImpl implements RecipeMapper{
+	
+	private CategoryMapper categoryMapper;
 
 	@Override
 	public Recipe recetaCreateDtoToReceta(RecipeCreateDto recipeCreateDto) {
@@ -40,6 +47,16 @@ public class RecipeMapperImpl implements RecipeMapper{
 				recipe.getDificultad(),
 				recipe.getDescripcion(),
 				recipe.getCategoria().getId());
+	}
+
+	@Override
+	public RecipeGetByIdDto recetaToRecetaGetByIdDto(Recipe recipe) {
+		return new RecipeGetByIdDto(
+				recipe.getId(),
+				recipe.getNombre(),
+				recipe.getDificultad(),
+				recipe.getDescripcion(),
+				categoryMapper.categoriaToCategoriaCreatedDto(recipe.getCategoria()));
 	}
 
 }
