@@ -10,6 +10,7 @@ import com.informatorio.recetas.domain.Step;
 import com.informatorio.recetas.dto.ingrediente.IngredienteCreateDto;
 import com.informatorio.recetas.dto.paso.StepCreateDto;
 import com.informatorio.recetas.dto.paso.StepCreatedDto;
+import com.informatorio.recetas.dto.paso.StepDetailDto;
 import com.informatorio.recetas.dto.paso.StepIngredientUpdatedDto;
 import com.informatorio.recetas.mapper.ingrediente.IngredientMapper;
 import com.informatorio.recetas.mapper.paso.StepMapper;
@@ -41,6 +42,12 @@ public class StepServiceImpl implements StepService{
 				.add(ingredientRepository.save(ingredientMapper.ingredienteCreateDtoToIngrediente(ingredienteDto))));
 		//step.getIngredientes().add(ingredientRepository.getReferenceById(idIngrediente));
 		return Optional.of(stepMapper.stepToStepIngredientUpdatedDto(stepRepository.save(step)));
+	}
+
+	@Override
+	public Optional<StepDetailDto> getStepById(UUID id) {
+		Step step = stepRepository.getReferenceById(id);
+		return Optional.of(stepMapper.stepToStepDetailDto(step));
 	}
 
 }

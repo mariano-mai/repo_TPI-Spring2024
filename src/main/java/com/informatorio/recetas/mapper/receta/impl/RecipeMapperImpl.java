@@ -10,6 +10,7 @@ import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
 import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
 import com.informatorio.recetas.mapper.categoria.CategoryMapper;
+import com.informatorio.recetas.mapper.paso.StepMapper;
 import com.informatorio.recetas.mapper.receta.RecipeMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import lombok.AllArgsConstructor;
 public class RecipeMapperImpl implements RecipeMapper{
 	
 	private CategoryMapper categoryMapper;
+	private StepMapper stepMapper;
 
 	@Override
 	public Recipe recetaCreateDtoToReceta(RecipeCreateDto recipeCreateDto) {

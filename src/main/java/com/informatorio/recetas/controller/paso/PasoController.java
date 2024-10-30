@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.informatorio.recetas.dto.paso.StepCreateDto;
 import com.informatorio.recetas.dto.paso.StepCreatedDto;
+import com.informatorio.recetas.dto.paso.StepDetailDto;
 import com.informatorio.recetas.dto.paso.StepIngredientUpdateDto;
 import com.informatorio.recetas.dto.paso.StepIngredientUpdatedDto;
 import com.informatorio.recetas.service.paso.StepService;
@@ -41,6 +43,15 @@ public class PasoController {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(stepUpdated.get());
+	}
+	
+	@GetMapping("/api/v1/step/{idStep}")
+	public ResponseEntity<?> getStepById(
+			@PathVariable("idStep") UUID idStep){
+		Optional<StepDetailDto> stepDetailDto = stepService.getStepById(idStep);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(stepDetailDto.get());
 	}
 
 }
