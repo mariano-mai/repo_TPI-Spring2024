@@ -1,10 +1,14 @@
 package com.informatorio.recetas.mapper.receta.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
 import com.informatorio.recetas.domain.Recipe;
+import com.informatorio.recetas.domain.Step;
+import com.informatorio.recetas.dto.paso.StepDetailDto;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
@@ -58,7 +62,14 @@ public class RecipeMapperImpl implements RecipeMapper{
 				recipe.getNombre(),
 				recipe.getDificultad(),
 				recipe.getDescripcion(),
-				categoryMapper.categoriaToCategoriaCreatedDto(recipe.getCategoria()));
+				categoryMapper.categoriaToCategoriaCreatedDto(recipe.getCategoria()),
+				agregarPasosDto(recipe.getPasos()));
+	}
+	
+	private List<StepDetailDto> agregarPasosDto(List<Step> lista){
+		List<StepDetailDto> pasosDto = new ArrayList<>();
+		lista.stream().forEach(step -> pasosDto.add(stepMapper.stepToStepDetailDto(step)));
+		return pasosDto;
 	}
 
 }

@@ -43,7 +43,7 @@ public class Recipe {
 	@Column(nullable=false, unique=true)
 	private String nombre;
 	
-	@OneToMany(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="receta", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private List<Step> pasos;
 	
 	@Column(nullable=false)
