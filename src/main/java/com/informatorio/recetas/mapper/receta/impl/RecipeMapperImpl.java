@@ -16,6 +16,7 @@ import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
 import com.informatorio.recetas.mapper.categoria.CategoryMapper;
 import com.informatorio.recetas.mapper.paso.StepMapper;
 import com.informatorio.recetas.mapper.receta.RecipeMapper;
+import com.informatorio.recetas.repository.categoria.CategoryRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -24,6 +25,7 @@ import lombok.AllArgsConstructor;
 public class RecipeMapperImpl implements RecipeMapper{
 	
 	private CategoryMapper categoryMapper;
+	private CategoryRepository categoryRepository;
 	private StepMapper stepMapper;
 
 	@Override
@@ -33,6 +35,7 @@ public class RecipeMapperImpl implements RecipeMapper{
 		newRecipe.setNombre(recipeCreateDto.nombre());
 		newRecipe.setDificultad(recipeCreateDto.dificultad());
 		newRecipe.setDescripcion(recipeCreateDto.descripcion());
+		newRecipe.setCategoria(categoryRepository.getReferenceById(recipeCreateDto.idCategoria()));
 		return newRecipe;
 	}
 
