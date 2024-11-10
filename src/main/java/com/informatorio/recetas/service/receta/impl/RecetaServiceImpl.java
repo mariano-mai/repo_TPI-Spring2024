@@ -47,4 +47,14 @@ public class RecetaServiceImpl implements RecetaService{
 		return Optional.of(recipeMapper.recetaToRecetaGetByIdDto(receta));
 	}
 
+	@Override
+	public boolean deleteRecipe(UUID id) {
+		Optional<Recipe> recipe = Optional.of(recipeRepository.getReferenceById(id));
+		if(recipe.isPresent()) {
+			recipeRepository.delete(recipeRepository.getReferenceById(id));
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -15,5 +15,7 @@ public interface RecetaService {
 	Optional<RecipeCategoryUpdatedDto> addCategory(UUID idReceta, UUID idCategoria);
 	
 	Optional<RecipeGetByIdDto> getRecetaById(UUID id);
+	
+	boolean deleteRecipe(UUID id);
 
 }
