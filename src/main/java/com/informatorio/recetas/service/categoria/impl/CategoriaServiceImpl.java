@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.informatorio.recetas.domain.Category;
 import com.informatorio.recetas.dto.categoria.CategoryCreateDto;
 import com.informatorio.recetas.dto.categoria.CategoryCreatedDto;
+import com.informatorio.recetas.dto.categoria.CategoryDto;
 import com.informatorio.recetas.mapper.categoria.CategoryMapper;
 import com.informatorio.recetas.repository.categoria.CategoryRepository;
 import com.informatorio.recetas.repository.receta.RecipeRepository;
@@ -34,6 +35,12 @@ public class CategoriaServiceImpl implements CategoriaService{
 		Category category = categoryRepository.getReferenceById(idCategoria);
 		category.getRecetas().add(recipeRepository.getReferenceById(idReceta));
 		
+	}
+
+	@Override
+	public Optional<CategoryDto> getCategoryById(UUID id) {
+		Category category = categoryRepository.getReferenceById(id);
+		return Optional.of(categoryMapper.categoriaToCategoriaDto(category));
 	}
 
 }

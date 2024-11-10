@@ -46,4 +46,5 @@ public class RecetaServiceImpl implements RecetaService{
 		Recipe receta = recipeRepository.getReferenceById(id);
 		return Optional.of(recipeMapper.recetaToRecetaGetByIdDto(receta));
 	}
+
 }

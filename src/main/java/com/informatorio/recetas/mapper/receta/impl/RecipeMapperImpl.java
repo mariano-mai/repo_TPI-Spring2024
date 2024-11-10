@@ -66,7 +66,8 @@ public class RecipeMapperImpl implements RecipeMapper{
 				recipe.getDificultad(),
 				recipe.getDescripcion(),
 				categoryMapper.categoriaToCategoriaCreatedDto(recipe.getCategoria()),
-				agregarPasosDto(recipe.getPasos()));
+				agregarPasosDto(recipe.getPasos())
+				);
 	}
 	
 	private List<StepDetailDto> agregarPasosDto(List<Step> lista){
