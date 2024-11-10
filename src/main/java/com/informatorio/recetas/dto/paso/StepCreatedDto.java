@@ -6,7 +6,7 @@ import java.util.UUID;
 public record StepCreatedDto(
 		UUID id, 
 		String descripcion, 
-		//List<Long> ingredientes, 
+		List<String> ingredientes, 
 		UUID receta, 
 		String nombreReceta,
 		int tiempoEstimado, 

@@ -15,8 +15,9 @@ import com.informatorio.recetas.dto.paso.StepDetailDto;
 import com.informatorio.recetas.dto.paso.StepIngredientUpdatedDto;
 import com.informatorio.recetas.mapper.ingrediente.IngredientMapper;
 import com.informatorio.recetas.mapper.paso.StepMapper;
-//import com.informatorio.recetas.repository.ingrediente.IngredientRepository;
+import com.informatorio.recetas.repository.ingrediente.IngredientRepository;
 import com.informatorio.recetas.repository.receta.RecipeRepository;
+import com.informatorio.recetas.service.ingrediente.IngredientService;
 
 import lombok.AllArgsConstructor;
 
@@ -25,8 +26,9 @@ import lombok.AllArgsConstructor;
 public class StepMapperImpl implements StepMapper{
 	
 	private RecipeRepository recipeRepository;
-	//private IngredientRepository ingredientRepository;
+	private IngredientRepository ingredientRepository;
 	private IngredientMapper ingredientMapper;
+	private IngredientService ingredientService;
 
 	@Override
 	public Step stepCreateDtoToStep(StepCreateDto stepCreateDto) {
@@ -34,8 +36,9 @@ public class StepMapperImpl implements StepMapper{
 		newStep.setReceta(recipeRepository.getReferenceById(stepCreateDto.idReceta()));
 		newStep.setDescripcion(stepCreateDto.descripcion());
 		newStep.setTiempoEstimado(stepCreateDto.tiempoEstimado());
-		/*stepCreateDto.ingredientes().stream()
-			.forEach(ingrediente -> newStep.getIngredientes().add(ingredientRepository.getReferenceById(ingrediente)));*/
+		stepCreateDto.ingredientes().stream()
+			.forEach(ingrediente -> newStep.getIngredientes().add(ingredientRepository.getReferenceById(
+					ingredientService.createIngredient(ingrediente).get().id())));
 		newStep.setEsNecesario(stepCreateDto.esNecesario());
 		return newStep;
 	}
@@ -45,7 +48,7 @@ public class StepMapperImpl implements StepMapper{
 		return new StepCreatedDto(
 				step.getId(),
 				step.getDescripcion(),
-				//agregarIngredientes(step.getIngredientes()),
+				agregarNombresDeIngredientes(step.getIngredientes()),
 				step.getReceta().getId(),
 				step.getReceta().getNombre(),
 				step.getTiempoEstimado(),
