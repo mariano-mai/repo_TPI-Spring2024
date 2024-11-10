@@ -8,6 +8,7 @@ public record RecipeByCategoryDto(
 		UUID id,
 		String nombre,
 		DificultadEnum dificultad,
-		String descripcion) {
+		String descripcion,
+		int tiempoNecesario) {
 
 }
