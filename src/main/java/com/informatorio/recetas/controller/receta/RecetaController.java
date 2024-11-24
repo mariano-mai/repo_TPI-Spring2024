@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.informatorio.recetas.dto.paso.StepCreatedDto;
+import com.informatorio.recetas.dto.paso.StepUpdateDto;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdateDto;
 import com.informatorio.recetas.dto.receta.RecipeCategoryUpdatedDto;
 import com.informatorio.recetas.dto.receta.RecipeCreateDto;
 import com.informatorio.recetas.dto.receta.RecipeCreatedDto;
 import com.informatorio.recetas.dto.receta.RecipeGetByIdDto;
+import com.informatorio.recetas.service.paso.StepService;
 import com.informatorio.recetas.service.receta.RecetaService;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +31,7 @@ import lombok.AllArgsConstructor;
 public class RecetaController {
 	
 	private RecetaService recipeService;
+	private StepService stepService;
 	
 	@PostMapping("/api/v1/recipe")
 	public ResponseEntity<?> createRecipe(@RequestBody RecipeCreateDto recipeCreateDto){
@@ -44,6 +49,17 @@ public class RecetaController {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(recipeUpdated.get());
+	}
+	
+	@PutMapping("/api/v1/recipe/")
+	public ResponseEntity<?> updateStepOfRecipe(
+			@RequestParam(name="idReceta") UUID idReceta,
+			@RequestParam(name="idPaso") UUID idPaso,
+			@RequestBody StepUpdateDto stepUpdateDto){
+		Optional<StepCreatedDto> stepUpdated = stepService.updateStep(idPaso, stepUpdateDto);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(stepUpdated.get());
 	}
 	
 	@GetMapping("/api/v1/recipe/{idReceta}")

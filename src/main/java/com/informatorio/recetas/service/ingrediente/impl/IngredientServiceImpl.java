@@ -27,4 +27,14 @@ public class IngredientServiceImpl implements IngredientService{
 		return Optional.of(ingredientMapper.ingredienteToIngredientCreatedDto(ingredientRepository.save(newIngredient)));
 	}
 
+	@Override
+	public boolean deleteIngredient(Long id) {
+		Optional<Ingredient> ingredient = Optional.of(ingredientRepository.getReferenceById(id));
+		if(ingredient.isPresent()) {
+			ingredientRepository.delete(ingredientRepository.getReferenceById(id));
+			return true;
+		}
+		return false;
+	}
+
 }

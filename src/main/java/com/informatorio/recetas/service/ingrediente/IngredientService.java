@@ -8,5 +8,7 @@ import com.informatorio.recetas.dto.ingrediente.IngredienteCreatedDto;
 public interface IngredientService {
 	
 	Optional<IngredienteCreatedDto> createIngredient(IngredienteCreateDto ingredienteCreateDto);
+	
+	boolean deleteIngredient(Long id);
 
 }
